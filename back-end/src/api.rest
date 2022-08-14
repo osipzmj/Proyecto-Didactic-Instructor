@@ -1,0 +1,52 @@
+###
+GET http://localhost:9000/agregar-tema
+
+###
+POST http://localhost:9000/agregar-tema
+Content-Type: application/json
+
+{
+    "cveArea": 2,
+    "nombre": "Aplicaciones Web",
+    "descripcion": "Aplicaciones web con angular"
+}
+
+###
+DELETE  http://localhost:9000/agregar-tema/4
+
+###
+PUT  http://localhost:9000/agregar-tema/24
+Content-Type: application/jsons
+
+{
+    "nombre": "Aplicaciones Web Back-end"
+}
+
+###
+GET http://localhost:9000/agregar-actividad
+
+###
+POST http://localhost:9000/agregar-actividad
+Content-Type: application/json
+
+{
+    "cveTema": 2,
+    "nombre": "Pruebas3",
+    "tipo": 1,
+    "valor": 50
+    
+}
+
+###
+DELETE  http://localhost:9000/agregar-actividad/2
+
+###
+PUT  http://localhost:9000/agregar-actividad/19
+Content-Type: application/json
+
+{
+    "valor": 80
+}
+
+###
+GET http://localhost:9000/area

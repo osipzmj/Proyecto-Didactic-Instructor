@@ -1,0 +1,116 @@
+<html>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</html>
+<div id="seccion_header">
+    <h4>Agregar temas</h4>
+</div>
+
+<br>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " href="/agregar-tema">Registro de temas</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/agregar-actividad">Agregar actividades a temas</a>
+    </li>
+</ul>
+<br>
+
+<div> 
+  <form #actividadForm="ngForm" (ngSubmit)="createActividades(actividadForm)" >
+    <input type="hidden" name="cveActividad" 
+     [(ngModel)]="actividadesService.actividad.cveActividad">
+     <div class="form-group">
+        <br>
+        <label>Tema</label>
+        <select  name="cveTema" class="form-control" id="orden"  [(ngModel)]="actividadesService.actividad.cveTema">
+          <option *ngFor="let item of temasService.temas">{{item.cveTema}}</option>
+        </select>
+        <br>
+        <br>
+        <br>
+      </div>
+    <div class="form-group">
+    <label>Nombre</label>
+    <input name="nombre" id="input-text2" type="text"  class="form-control"  placeholder="nombre"
+    [(ngModel)]="actividadesService.actividad.nombre">
+    <br>
+     <br>
+     <br>
+    </div>
+  
+    <div class="form-group">
+      <label>Tipo</label>
+      <select  name="tipo" class="form-control" id="orden"  [(ngModel)]="actividadesService.actividad.tipo">
+        <option>Lectura</option>
+        <option>Video</option>
+        <option>Juego</option>
+      </select>
+    <br>
+   <br>
+   <br>
+  </div>
+  <div class="form-group">
+      <label>Valor</label>
+    <input name="valor" id="input-text5" type="number"  class="form-control"  placeholder="valor"
+    [(ngModel)]="actividadesService.actividad.valor">
+    <br>
+   <br>
+   <br>
+  </div>
+  <div class="form-group">
+    <label>Contenido</label>
+    <input name="contenido" id="input-text6" type="text"  class="form-control"  placeholder="contenido"
+    [(ngModel)]="actividadesService.actividad.contenido">
+  </div>
+  <br>
+  <br>
+  <div id="boton">
+    <button class="btn btn-primary">Guardar</button>
+    <button (click)="formReset(actividadForm)" type="button" class="btn btn-primary"> Limpiar</button>
+  </div>
+   <br>
+   <br>    
+  </form>
+</div>
+<div class="table">           
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Actividad</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Contenido</th>
+        <th></th>
+        <th></th>
+        <th>Agregar Archivos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of actividadesService.actividades">
+        <td>{{item.cveActividad}}</td>
+        <td>{{item.nombre}}</td> 
+        <td >{{item.tipo}}</td>
+        <td >{{item.valor}}</td>
+        <td>{{item.contenido}}</td>
+        <td (click)="editActividades(item)" style="cursor: pointer;text-align: center;"><i class="fa-solid fa-pen-to-square"></i></td>
+        <td (click)="deleteActividades(item.cveActividad)" style="cursor: pointer;text-align: center;"><i class="fa-regular fa-trash-can"></i></td>
+        <td><span [ngSwitch]="item.tipo">
+        <p *ngSwitchCase="'Lectura'" routerLink="/act-lectura">
+          <i class="fa-solid fa-circle-plus"></i>
+        </p>
+        <p *ngSwitchCase="'Juego'" routerLink="/act-juego">
+          <i class="fa-solid fa-circle-plus"></i>
+        </p>
+        <p *ngSwitchDefault routerLink="/act-video">
+          <i style="cursor: pointer" class="fa-solid fa-circle-plus"></i>
+        </p>
+        </span></td>
+       
+      
+      </tr>
+    </tbody>
+  </table>
+</div>
+

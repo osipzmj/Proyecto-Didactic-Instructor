@@ -1,0 +1,122 @@
+<html>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</html>
+<div id="seccion_header">
+  <h4>Agregar temas</h4>
+</div>
+<nav class="navbar navbar-expand-sm">
+  </nav>
+<br/>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="/agregar-tema">Registro de temas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/agregar-actividad">Agregar actividades a temas</a>
+  </li>
+</ul>
+<div> 
+<form #temaForm="ngForm" (ngSubmit)="createTemas(temaForm)" >
+  <input type="hidden" name="cveTema" 
+   [(ngModel)]="temasService.tema.cveTema">
+  <div class="form-group">
+    <br>
+    <label>Área de Conocimiento</label>
+  <select  name="cveArea" class="form-control" id="orden"  [(ngModel)]="temasService.tema.cveArea">
+    <option *ngFor="let item of areasService.areas">{{item.cveArea}}</option>
+   </select>
+   <br>
+   <br>
+   <br>
+</div>
+  <div class="form-group">
+  <label>Nombre Tema</label>
+  <input name="nombre" id="orden" type="text"  class="form-control"  placeholder="nombre"
+  [(ngModel)]="temasService.tema.nombre">
+  <br>
+   <br>
+   <br>
+</div>
+  <div class="form-group">
+    <label>Descripción</label>
+  <input name="descripcion" id="orden" type="text"  class="form-control"  placeholder="descripción"
+  [(ngModel)]="temasService.tema.descripcion">
+  <br>
+   <br>
+   <br>
+</div>
+<br>
+<div id="boton">
+  <button  class="btn btn-primary">Guardar</button>
+  <button (click)="formReset(temaForm)" type="button" class="btn btn-primary"> Limpiar</button>
+</div>
+<br>
+<br>
+</form>
+</div>
+  <div class="table">           
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th >#</th>
+          <th >Nombre del Tema</th>
+          <th  >Descripción</th>
+          <th >Tema Base</th>
+          <th></th>
+          <th></th>
+          <th >Agregar Actividades</th>
+          <th  >Comentarios</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of temasService.temas">
+          <td>{{item.cveTema}}</td>
+          <td>{{item.nombre}}</td>
+          <td>{{item.descripcion}}</td>
+          <td style="cursor: pointer;"><i class="fa-regular fa-circle-check"></i></td>
+          <td (click)="editTemas(item)" style="cursor: pointer;text-align: center;"><i class="fa-solid fa-pen-to-square"></i></td>
+          <td (click)="deleteTemas(item.cveTema)" style="cursor: pointer;text-align: center;"><i class="fa-regular fa-trash-can"></i></td>
+          <td style="cursor: pointer;"><i class="fa-solid fa-circle-plus"></i></td>
+          <td ><button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+            Ver Comentarios
+          </button>
+          <div class="modal" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+          
+                <div class="modal-header">
+                  <h4 class="modal-title">Comentarios</h4>
+                
+                </div>
+          
+                
+                <div class="modal-body">
+                  Comentario...
+                </div>
+                <br>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+          
+              </div>
+            </div>
+          </div>
+        </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="text-align: center;"></td>
+          <td style="text-align: center;"></td>
+          <td>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br/>
+  <br/>
+ 
+ 
